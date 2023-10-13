@@ -25,9 +25,9 @@ class api
 	}
 
 	/**
-	 * @return void
+	 * @throws Exception
 	 */
-	public function call(): void
+	public function call()
 	{
 		try
 		{
@@ -54,23 +54,24 @@ class api
 		}				
 	}
 
+
 	/**
 	 * @return void
 	 */
-	public function MetodoGet(): void
+	public function MetodoGet()
 	{			
 		try {				
-			$Validar = new valida();
-			$Valor = [];
+			$validate = new Validate();
+			$object = new Objeto();
+			$value = $object->getObject();
 			
-			$Validar->CreaRespuesta("0", "", $Valor);
+			$validate->createResponse("0", "", $value);
 			
-			echo json_encode($Validar->ObtenerResponse(), JSON_PRETTY_PRINT  | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+			$validate->getResponse();
 		} catch (Exception $e) {
-			$Validar->CreaRespuesta("-1", "Error", []);
+			$validate->createResponse("-1", "Error", []);
+			$validate->getResponse();
 		}
-
-		$Response = $Validar->ObtenerResponse();
 	}
 
 	/**
@@ -81,10 +82,10 @@ class api
 	{
 		try
 		{
-			$Validar = new valida();
-			$ObjetoColor = new objeto();
+			$Validar = new Validate();
+			$ObjetoColor = new Objecto();
 			$rutatemp = "temp/";
-			$ValorObjeto = $ObjetoColor->ObtenerObjeto();
+			$ValorObjeto = $ObjetoColor->getObject();
 
 			$nombreArchivo = $nombreArchivo . ".json";
 			file_put_contents($rutatemp . $nombreArchivo, json_encode($ValorObjeto), FILE_APPEND | LOCK_EX);
@@ -111,7 +112,7 @@ class api
 				die();
 			}
 		} catch(Exception $e) {
-			$Validar->CreaRespuesta("-1", "Error", []);
+			$Validar->createResponse("-1", "Error", []);
 		}
 	}
 }

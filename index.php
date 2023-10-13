@@ -9,4 +9,3 @@
 
 	$api = new api($metodo);
 	$api->call();
-	

@@ -5,7 +5,7 @@
  * 
  * @author Marcos Ortega <marcos.ortega@dportenis.com.mx>
  */
-class valida
+class Validate
 {
 	private $response = array();
 	private $rutatemp = "temp/";
@@ -19,7 +19,7 @@ class valida
 	 * 
 	 * @return void
 	 */
-	public function CreaRespuesta($codigo, $mensaje = "", $objeto = null): void
+	public function createResponse($codigo, $mensaje = "", $objeto = null): void
 	{
 		switch ($codigo) {
 			case '0':
@@ -35,44 +35,12 @@ class valida
 	}
 
 	/**
-	 * Get json in array format.
-	 * 
-	 * @return array
+	 * Get response
 	 */
-	public function ObtenerResponse(): array
+	public function getResponse()
 	{
-		return [
-			[
-			  "tipo" => "carro",
-			  "tamanio" => "Grande",
-			  "color" => "Green"
-			],
-			[
-			  "tipo" => "moto",
-			  "tamanio" => "mediana",
-			  "color" => "Blue"
-			],
-			[
-			  "tipo" => "bicicleta",
-			  "tamanio" => "chica",
-			  "color" => "Green"
-			],
-			[
-			  "tipo" => "avion",
-			  "tamanio" => "grande",
-			  "color" => "yellow"
-			],
-			[
-			  "tipo" => "lancha",
-			  "tamanio" => "grande",
-			  "color" => "Red"
-			],
-			[
-			  "tipo" => "moto",
-			  "tamanio" => "mediano",
-			  "color" => "Red"
-			],
-		];
+		header('Content-Type: application/json');
+		echo json_encode($this->response, JSON_PRETTY_PRINT  | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
 	}
 
 	/**
@@ -81,7 +49,7 @@ class valida
 	 * @param string $nombreArchivo
 	 * @return void
 	 */
-	public function ExportarJson($nombreArchivo){			
+	public function exportJson($nombreArchivo){			
 		file_put_contents($this->rutatemp .$nombreArchivo, json_encode($this->response), FILE_APPEND | LOCK_EX);
 	}
 }
