@@ -1,11 +1,12 @@
-<?php 
-	require_once('modelo/api.php');
+<?php
 
-	header("HTTP/1.1 200");
-	header('Content-Type: application/json; charset=UTF-8');
-	header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
+require_once 'modelo/Api.php';
 
-	$metodo =  $_SERVER['REQUEST_METHOD'];
+header("HTTP/1.1 200");
+header('Content-Type: application/json; charset=UTF-8');
+header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
 
-	$api = new api($metodo);
-	$api->call();
+$method =  $_SERVER['REQUEST_METHOD'];
+
+$api = new Api($method);
+$api->call();
